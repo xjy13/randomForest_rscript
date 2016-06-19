@@ -1,7 +1,5 @@
 ***Using randomForest Package***
-
-Description: To execute randomForest() to build prediction model, and using k-fold cross-validation to validated.
-Functions: runRF(), doCV()
+# build in Feb.2009 and final release in Oct. 2010
 
 # Load randomForest package.
 library(randomForest)
@@ -97,16 +95,15 @@ doCV = function(x)
 # load this library to observe the factors' important rating  
 library(varSelRF)
 
-fin<- read.csv("sample5-2.csv", header = TRUE, sep = ",", dec =".")
+fin<- read.csv("file_path", header = TRUE, sep = ",", dec =".")
 x<-fin[,1:22]
 y<-fin[,23]
 cl<-factor(y)
+# setup your quantity of decision tree , run these tree for n times ...etc
 fin.vs1 <- varSelRF(x, cl, ntree =200, ntreeIterat = 100,vars.drop.frac = 0.2,c.sd=1)
+fin.vsb <- varSelRFBoot(x, cl,bootnumber = 10,usingCluster = FALSE,srf = fin.vs1)
 
-fin.vsb <- varSelRFBoot(x, cl,bootnumber = 10,usingCluster = FALSE,srf = fin.vs1)#±o¥X¬D¿ï«á¤ÀÃþ·Ç½T²v
-
-
-fin <- read.csv("sample5-2.csv", header = TRUE, sep = ",", dec =".")
+fin <- read.csv("file_path", header = TRUE, sep = ",", dec =".")
 x<-fin[,1:22]
 y<-fin[,23]
 cl<-factor(y)
